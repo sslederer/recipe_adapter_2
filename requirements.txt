@@ -1,0 +1,9 @@
+recipe-scrapers
+nltk
+ingredient-parser-nlp
+dill
+numpy
+scikit-learn
+beautifulsoup4
+requests
+streamlit
