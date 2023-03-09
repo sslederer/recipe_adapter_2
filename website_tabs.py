@@ -7,7 +7,7 @@ from parse_website import get_metadata
 import time
 
 #title
-tab1, tab2 = st.tabs(['Main','About'])
+tab1, tab2 = st.tabs(['Main','Data and performance'])
 with tab1:
     st.title('Recipe Adapter')
     st.write('###')
@@ -88,4 +88,6 @@ with tab1:
             st.write('### No suitable substitutes in database')
 
 with tab2:
-    st.title('About the app')
+    st.header("Data statistics and standardization")
+    st.write('### Test lorem ipsum Test lorem ipsumTest lorem ipsumTest \
+             lorem ipsumTest lorem ipsumTest lorem ipsumTest lorem ipsum')
