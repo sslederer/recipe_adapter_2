@@ -4,7 +4,12 @@ nltk.download('averaged_perceptron_tagger')
 from ingredient_parser import parse_ingredient
 import sys
 
-    
+"""
+A variety of standardization transformations applied to each recipe.
+Includes NLP through the ingredient_parser package, as well as a variety of hard coded
+transformations
+"""
+
 def revise_standardize(ingredients):
     new_ingredients = []
     for ingredient in ingredients:
@@ -28,29 +33,19 @@ def standardize(ingredient):
     
 def do_replacements(ingredient,replacements):
     for replacement in replacements:
-        # print((replacement,ingredient))
         ingredient = re.sub(replacement[0],replacement[1],ingredient)
         ingredient = ingredient.strip()
     return ingredient
 
 def replacements(ingredient):
-    # print('initial:', ingredient)    
     ingredient = replace_quantity(ingredient)
-    # print('replaced quantities:', ingredient)    
     ingredient = replace_other(ingredient)
-    # print('replaced other:', ingredient)
     ingredient = replace_produce(ingredient)
-    # print('replaced produce:', ingredient)
     ingredient = replace_meat(ingredient)
-    # print('replaced meat:', ingredient)
     ingredient = replace_pasta(ingredient)
-    # print('replaced pasta:', ingredient)
     ingredient = replace_dairy(ingredient)
-    # print('replaced dairy:', ingredient)
     ingredient = replace_pluralized(ingredient)
-    # print('replaced plurals:', ingredient)
     ingredient = replace_pantry(ingredient)
-    # print('replaced pantry:', ingredient)
     return ingredient
 
 def replace_quantity(ingredient):
@@ -147,8 +142,9 @@ running_list = (['bow-tie pasta','fusilli','spaghetti','yellow onions','celery r
                  'dark brown sugar','white rice','brown rice','luke warm water','lukewarm water','luke-warm water','red wine vinegar','no sodium added soy sauce',' canned black beans','fresh basil','dried basil','low-fat yogurt',
                  'low sodium chicken stock','unsalted butter','half and half','2% milk','greek yogurt', 'boneless skinless chicken breasts','ground turkey'
                 ])
-# print(revise_standardize(running_list))
-# print(running_list)
+
+
+#for testing
 if __name__ == '__main__':
     print(' '.join(sys.argv[1:]))
     print(standardize(' '.join(sys.argv[1:])))

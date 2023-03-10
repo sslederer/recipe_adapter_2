@@ -3,7 +3,6 @@ from recipe_scrapers import scrape_me
 import parsing
 import dill
 import tfidf
-import time
 
 #title
 tab1, tab2 = st.tabs(['Main','Data and performance'])
@@ -13,7 +12,6 @@ with tab1:
 
     #user inputs recipe website, which we scrape
     text = st.text_input('Enter recipe url',value='https://www.food.com/recipe/boiled-water-422354')
-    start = time.time()
     scraper = scrape_me(text,wild_mode=True)
     title = scraper.title()
 
@@ -26,8 +24,9 @@ with tab1:
 
     # get category and relevant data
     category = st.radio('Category',('Soup/stew','Pasta'))
-
     st.write('#### ')
+    
+    #Load relevant data 
     if category == 'Soup/stew':
         with open('data/soup_parsed.pkd','rb') as file:
             results = dill.load(file)
@@ -50,6 +49,7 @@ with tab1:
                                 ['Vegetarian','Vegan','Gluten-free','Dairy-free','Kosher'])
     st.write('###')
     restrictions = [restriction for restriction in restrictions]
+    
     #hit search
     clicked = st.button('Search for '+', '.join([restriction.lower() for restriction in restrictions])
                         +' substitutes')
@@ -58,21 +58,21 @@ with tab1:
         
     number = 5   
     if clicked:
-        #find top matches
-        start = time.time()
+        #find top matches, twice as many as the eventual output 
+        # to account for possible invalid recipes
         scores, matches, indices = tfidf.get_best(target_recipe, recipes, \
                             restrictions=restrictions,number_results=2*number)
         ingredients = set(target_recipe['ingredients']) 
-        # print('finding matches took', time.time()-start)
         
         match_count = 0
         while matches and match_count < number:
-            # print('match count', match_count)
             match = matches.pop(0)
             index = indices.pop(0)
+            
             #Known problem recipe that often shows up
             if category == 'Pasta' and index == 5158:
                 continue
+            
             #Must have valid title and URL
             if not match['label']:
                 continue
