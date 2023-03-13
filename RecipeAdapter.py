@@ -139,7 +139,7 @@ with tab2:
             has a very large variance, and has a strong negative correlation with recipe length, \
             as illustrated in the scatter plots of Figure 4.\
                 ")
-    st.image('./plots/scores_ratios.png', caption='Fig. 4: Correlation of the figure of merit with\
+    st.image('./plots/score_ratios.png', caption='Fig. 4: Correlation of the figure of merit with\
         recipe length. The figure of merit is the ratio of the top score to the mean, which\
             which is here shown to vary wildly, and have a strong native correlation\
                 with recipe length.')
