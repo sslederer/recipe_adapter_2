@@ -110,10 +110,12 @@ with tab2:
                 of approximately 3, and also flattens the distribution , as shown in the right panels\
                 of Figures 1 and 2.\
                 ')
-    st.image('./plots/hist_pastas.png', caption='Fig. 1: ingredient frequency distribution\
-        for the pasta corpus. The right panel shows the result after standardization.')
     st.image('./plots/hist_soups.png', caption='Fig. 2: ingredient frequency distribution\
         for the soup and stew corpus. The right panel shows the result after standardization.')
+    
+    st.image('./plots/hist_pastas.png', caption='Fig. 1: ingredient frequency distribution\
+        for the pasta corpus. The right panel shows the result after standardization.')
+    
     
     st.header('Recommendation performance')
     st.markdown("It would be desirable to evaluate the performance of the app\
@@ -121,8 +123,7 @@ with tab2:
             form of human input, which is beyond the scope of the present effort. \
             Nevertheless, a means of numerical evaluation is available by comparing \
             the similarity scores (cosine similarities) of the top recommendation(s)\
-            to the overall distribution of scores. We have not carried out a formal analysis\
-            along these lines, but Figure 3 illustrates the idea. The distributions\
+            to the overall distribution of scores. Figure 3 illustrates the idea. The distributions\
             are strongly peaked near zero, with the largest values much greater than the mean. \
             According to this crude metric, the top recommendations are many times better\
             than choosing a recipe at random, as expected.\
@@ -130,3 +131,15 @@ with tab2:
     st.image('./plots/scores.png', caption='Fig. 3: distribution of similarity scores \
         for selected recipes. The vertical orange lines show the expected \
         value of the similarity score over the distribution.')
+    
+    st.markdown("Perhaps a more natural figure of merit to for the quality of a recommendation \
+            would be the ratio of the top score to the mean of the score distribution. \
+            To explore this, we consider potential vegan substitutes for all\
+            the non-vegan recipes our database. The figure of merit is typically \
+            has a very large variance, and has a strong negative correlation with recipe length, \
+            as illustrated in the scatter plots of Figure 4.\
+                ")
+    st.image('./plots/scores_ratios.png', caption='Fig. 4: Correlation of the figure of merit with\
+        recipe length. The figure of merit is the ratio of the top score to the mean, which\
+            which is here shown to vary wildly, and have a strong native correlation\
+                with recipe length.')
